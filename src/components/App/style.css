@@ -1,0 +1,80 @@
+nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+.banner {
+    display: flex;
+    align-content: flex-start;
+    justify-content: space-between;
+
+    background: #EDF8FF;
+    margin-top: 74px;
+    padding: 16px 79px;
+}
+
+
+.user-bio {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.user-image {
+    margin-right: 12px;
+}
+
+
+.user-info__name {
+    color: #153C55;
+    font-weight: 700;
+    font-size: 16px;
+
+    margin-bottom: 3px;
+}
+
+.user-info__phase {
+    color: #153C55;
+    font-size: 12px;
+}
+
+
+.user-statistics {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.user-statistic {
+    margin-left: 96px;
+}
+
+.user-statistic__label {
+    color: #153C55;
+    font-size: 14px;
+}
+
+.user-statistic__value {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    margin-top: 10px;
+}
+
+.user-statistic__icon {
+    margin-bottom: 19px;
+    margin-right: 8px;
+}
+
+.user-statistic__main {
+    font-size: 48px;
+    line-height: .95;
+}
+
+.user-statistic__against {
+    color: #153C55;
+    font-size: 14px;
+}

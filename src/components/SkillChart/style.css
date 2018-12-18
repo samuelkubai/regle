@@ -1,0 +1,19 @@
+.skill-chart {
+    margin-top: 32px;
+    padding: 0 79px;
+}
+
+.skill-chart__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skill-chart__title {
+    font-size: 18px;
+    font-size: 18px;
+}
+
+.skill-chart__body {
+    margin-top: 24px;
+}
