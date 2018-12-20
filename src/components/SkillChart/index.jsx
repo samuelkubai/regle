@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import '../custom-elements/CalendarPicker';
-
-import ReactChartkick, { LineChart } from 'react-chartkick'
+import ReactChartkick, { AreaChart } from 'react-chartkick'
 import Chart from 'chart.js'
+import { format, startOfISOWeek, endOfISOWeek } from 'date-fns';
+
+import '../custom-elements/CalendarPicker';
+import CalendarPicker from '../CalendarPicker';
 
 import './style.css';
 
+import CalendarIcon from '../../assets/calendar.svg';
+
 export default class SkillChart extends Component {
   state = {
-    analytics: [
-      ['Jan', 5],
-      ['Feb', 14],
-      ['Mar', 7],
-      ['Apr', 17],
-      ['May', 11],
-      ['Jun', 9],
-      ['Jul', 17],
-      ['Aug', 12],
-      ['Sep', 10],
-      ['Oct', 9],
-      ['Nov', 12],
-      ['Dec', 4]
-    ]
+    range: {
+      start: format(startOfISOWeek(new Date()), 'YYYY-MM-DD'),
+      end: format(endOfISOWeek(new Date()), 'YYYY-MM-DD')
+    }
+  };
 
+  handleCalendarChange =  range => {
+    this.setState(state => {
+      return {
+        ...state,
+        range: range
+      }
+    })
   };
 
   componentDidMount () {
@@ -30,7 +32,9 @@ export default class SkillChart extends Component {
   }
 
   render () {
-    const { analytics } = this.state;
+    const { range: { start, end } } = this.state;
+
+    const { timeline } = this.props;
 
     return (
       <div className="skill-chart">
@@ -39,11 +43,13 @@ export default class SkillChart extends Component {
             Learning velocity history
           </div>
 
-          <calendar-picker></calendar-picker>
+          <calendar-picker start={start} end={end} icon={CalendarIcon}>
+            <CalendarPicker handleChange={this.handleCalendarChange}/>
+          </calendar-picker>
         </div>
 
         <div className="skill-chart__body">
-          <LineChart curve={true} colors={['#1E2834']} discrete={true} data={analytics} />
+          <AreaChart curve={true} colors={['#A0D5F8']} data={timeline} />
         </div>
       </div>
     );

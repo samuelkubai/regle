@@ -7,6 +7,11 @@
     padding: 0 79px;
 }
 
+.skills-filters {
+    position: sticky;
+    top: 88px;
+}
+
 .skills-filter {
     margin-bottom: 14px;
 }

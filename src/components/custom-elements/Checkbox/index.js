@@ -11,11 +11,11 @@ class Checkbox extends HTMLElement {
   }
 
   get checked () {
-    return this.hasAttribute('checked')
+    return this.hasAttribute('checked') && this.getAttribute('checked') !== "false"
   }
 
   set checked(val) {
-    if (val) {
+    if (val && val !== "false") {
       this.setAttribute('checked', val);
     } else {
       this.removeAttribute('checked');
@@ -23,11 +23,11 @@ class Checkbox extends HTMLElement {
   }
 
   get disabled () {
-    return this.hasAttribute('disabled')
+    return this.hasAttribute('disabled') && this.getAttribute('disabled') !== "false"
   }
 
   set disabled(val) {
-    if (val) {
+    if (val && val !== "false") {
       this.setAttribute('disabled', val);
     } else {
       this.removeAttribute('disabled');
