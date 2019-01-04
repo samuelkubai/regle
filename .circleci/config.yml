@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:8
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -11,6 +11,8 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/regle
+    environment:
+        TERM: xterm-256color
 
     steps:
       - checkout
