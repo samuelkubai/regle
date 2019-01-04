@@ -1,0 +1,82 @@
+.calendar-scroll {
+    margin: 32px 79px 0;
+}
+
+.title {
+    color: #153C55;
+    font-size: 32px;
+}
+
+.title .subtle {
+    color: #CDD6DF;
+}
+
+.calendar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 32px;
+}
+
+.calendar img {
+    cursor: pointer;
+}
+
+ul.calendar__scroll {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.calendar__scroll li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #153C55;
+    cursor: pointer;
+    font-size: 18px;
+    height: 65px;
+    margin: 0 16px;
+}
+
+ul.calendar__scroll li:first-child {
+    margin-left: 0 !important;
+}
+
+ul.calendar__scroll li:last-child {
+    margin-right: 0 !important;
+}
+
+ul.calendar__scroll li .day {
+    color: #CDD6DF;
+}
+
+ul.calendar__scroll li.active .day {
+    color: #153C55;
+}
+
+ul.calendar__scroll li.selected {
+    height: 71px !important;
+}
+
+ul.calendar__scroll li.selected .date {
+    height: 36px;
+    width: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #A0D5F8;
+    border-radius: 50%;
+    padding-bottom: 3px;
+}
+
+

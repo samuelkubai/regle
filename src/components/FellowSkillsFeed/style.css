@@ -4,12 +4,13 @@
     justify-content: space-between;
 
     margin-top: 96px;
+    margin-bottom: 65px;
     padding: 0 79px;
 }
 
 .skills-filters {
     position: sticky;
-    top: 88px;
+    top: 8px;
 }
 
 .skills-filter {

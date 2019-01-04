@@ -42,6 +42,12 @@ class SkillCard extends HTMLElement {
     this.setAttribute('icon', val);
   }
 
+  getProgressWidth(skill, target) {
+    const width = (skill/target)*100;
+
+    return width > 100 ? 100 : width;
+  }
+
   getProgressColor(skill, target) {
     const progress = skill/target;
 
@@ -64,16 +70,16 @@ class SkillCard extends HTMLElement {
           
           <div class="skill-info">
             <div class="skill-title">${this.title}</div>
-            <div class="skill-summary">Requires <span class="skill-summary__value">${this.skill}</span> submissions</div>
+            <div class="skill-summary">Requires <span class="skill-summary__value">${parseInt(this.target).toLocaleString()}</span> submissions</div>
           </div>
         </div>
         
         <div class="skill-score">
-          <div class="skill-score__value">${this.skill}</div>
-          <div class="skill-score__target">/${this.target}</div>
+          <div class="skill-score__value">${parseInt(this.skill).toLocaleString()}</div>
+          <div class="skill-score__target">/${parseInt(this.target).toLocaleString()}</div>
         </div>
         
-        <div class="skill-progress ${this.getProgressColor(this.skill, this.target)}" style="width: ${(this.skill/this.target)*100}%"></div>
+        <div class="skill-progress ${this.getProgressColor(this.skill, this.target)}" style="width: ${this.getProgressWidth(this.skill, this.target)}%"></div>
       </div>
     `;
   }
@@ -139,7 +145,7 @@ class SkillCard extends HTMLElement {
         }
         
         .skill-score__value {
-            font-size: 48px;
+            font-size: 32px;
             line-height: 1;
         }
         

@@ -1,0 +1,153 @@
+.team-table {
+    margin: 32px 79px 100px;
+}
+
+.team-table__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #EDF8FF;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 22px 0 12px;
+}
+
+.team-table__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    color: #153C55;
+    margin: 0 96px;
+}
+
+.team-table__stat:first-child {
+    margin-left: 0 !important;
+}
+
+.team-table__stat:last-child {
+    margin-right: 0 !important;
+}
+
+.team-table__stat-title {
+    font-size: 14px;
+}
+
+.team-table__stat-value {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.team-table__stat-against {
+    font-size: 16px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr.table__header {
+    background: #F8F9FA;
+    font-weight: 700;
+}
+
+tr.table__header td img {
+    padding-left: 12px;
+}
+
+tr:not(.table__header) {
+    border-bottom: 1px solid #DFE6EB;
+}
+
+tr td {
+    color: #153C55;
+    font-size: 16px;
+    padding: 24px 0;
+}
+
+tr td:first-child, tr td:last-child  {
+    padding: 24px 32px;
+}
+
+.user-profile {
+    height: 35px;
+    width: 35px;
+
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.user-name {
+    color: #153C55;
+    font-size: 14px;
+}
+
+td a {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    color: #153C55;
+    text-decoration: none;
+}
+
+.user-phase {
+    color: #CDD6DF;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+tr:not(.table__header) td {
+    font-size: 14px;
+    font-weight: 600;
+    vertical-align: top;
+}
+
+tr:not(.table__header) td:first-child {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+td.right-align {
+    text-align: right;
+}
+
+tr:not(.table__header) td:last-child {
+    display: table-cell;
+
+    text-align: right;
+    text-align: -webkit-right;
+    padding: 24px 32px !important;
+}
+
+.badge {
+    width: 101px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 0;
+}
+
+.badge--ready {
+    background: #93F0EC;
+    color: #004644;
+}
+
+.badge--on-track {
+    background: #FFF3D4;
+    color: #5F4700;
+}
+
+.badge--off-track {
+    background: #FFA5A7;
+    color: #6A0F14;
+}
