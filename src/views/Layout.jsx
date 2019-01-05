@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import '../components/custom-elements/NavBar/index';
 import '../components/custom-elements/Breadcrumbs/index';
-import Team from './Team';
-import Fellow from './Fellow';
 
 import AuthHOC from '../components/hoc/auth';
 
@@ -13,29 +10,26 @@ import Caret from '../assets/union.svg';
 
 class Layout extends Component {
   render() {
-    const { user } = this.props;
+    const { user, children } = this.props;
 
     return (
-      <Router>
-        <Fragment>
-          <bread-crumbs
-            title="Regle"
-            icon={Logo}
-            path="Dashboard,Team,samuel.kubai@andela.com"
-          >
-          </bread-crumbs>
+      <Fragment>
+        <bread-crumbs
+          title="Regle"
+          icon={Logo}
+          path="Dashboard,Team,samuel.kubai@andela.com"
+        >
+        </bread-crumbs>
 
-          <Route path="/teams/:team" exact component={Team} />
-          <Route path="/teams/:team/:username" exact component={Fellow} />
+        { children }
 
-          <nav-bar
-            profile-name={user.UserInfo.name}
-            profile-image={user.UserInfo.picture}
-            chevron-down={Caret}
-          >
-          </nav-bar>
-        </Fragment>
-      </Router>
+        <nav-bar
+          profile-name={user.UserInfo.name}
+          profile-image={user.UserInfo.picture}
+          chevron-down={Caret}
+        >
+        </nav-bar>
+      </Fragment>
     );
   }
 }

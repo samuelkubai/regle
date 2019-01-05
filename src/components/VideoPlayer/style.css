@@ -1,0 +1,52 @@
+.video-player {
+    position: relative;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+}
+
+.pagination li {
+    width: 75px;
+    height: 5px;
+
+    background: #EDF8FF;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.pagination li.active {
+    background: #0083CD;
+}
+
+button {
+    height: 70px;
+    width: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 43px;
+    left: 24px;
+
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+button.active {
+    background: #0083CD;
+}
+
+button.rounded {
+    border-radius: 50%;
+}
