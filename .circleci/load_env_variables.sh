@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+ROOT_DIR=$(pwd)
+
+source $ROOT_DIR/.circleci/utils.sh
+
+require REACT_APP_API_URL $REACT_APP_API_URL
+require REACT_APP_JWT_PUBLIC_KEY $REACT_APP_JWT_PUBLIC_KEY
+
+export REACT_APP_API_URL=$REACT_APP_API_URL
+export REACT_APP_JWT_PUBLIC_KEY=$REACT_APP_JWT_PUBLIC_KEY
+
+generateEnvFile(){
+     cat <<EOF
+REACT_APP_API_URL=$REACT_APP_API_URL
+REACT_APP_JWT_PUBLIC_KEY=$REACT_APP_JWT_PUBLIC_KEY
+EOF
+}
+
+generateEnvFile > $ROOT_DIR/.env

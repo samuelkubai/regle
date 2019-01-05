@@ -1,36 +1,73 @@
 version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+defaults: &defaults
+  docker:
+    # specify the version you desire here
+    - image: circleci/node:8
+
+    # Specify service dependencies here if necessary
+    # CircleCI maintains a library of pre-built images
+    # documented at https://circleci.com/docs/2.0/circleci-images/
+    # - image: circleci/mongo:3.4.4
 
     working_directory: ~/regle
     environment:
-        TERM: xterm-256color
+      TERM: xterm-256color
 
+attach_workspace: &attach_workspace
+  attach_workspace:
+    at: ~/regle
+
+persist_to_workspace: &persist_to_workspace
+  persist_to_workspace:
+    root: .
+    paths: .
+
+install_npm_packages: &install_npm_packages
+  run:
+    name: Install NPM packages
+    command: yarn install
+
+jobs:
+  checkout_code:
+    <<: *defaults
+
+    - checkout
+    - *attach_workspace
+    # Download and cache dependencies
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-
+    - *install_npm_packages
+    - save_cache:
+        paths:
+          - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+    - *persist_to_workspace
+  build:
+    <<: *defaults
     steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: yarn build
+      - setup_remote_docker
+      - *attach_workspace
+      - *install_npm_packages
+      - run:
+          name: Generate .env file
+          command: |
+            chmod +x .circleci/load_env_variables.sh
+            .circleci/load_env_variables.sh
+      - run:
+          name: Build Application artifacts
+          command: yarn run build
+      - *persist_to_workspace
 
 
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - checkout_code
+      - build:
+          requires:
+            - checkout_code
