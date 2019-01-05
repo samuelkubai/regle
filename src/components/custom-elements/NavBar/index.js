@@ -1,4 +1,4 @@
-import GroupIconActive from '../../../assets/group-active.svg';
+import GroupIcon from '../../../assets/group.svg';
 import SettingsIcon from '../../../assets/settings.svg';
 import SkillsIcon from '../../../assets/skills.svg';
 import TeamIcon from '../../../assets/team.svg';
@@ -59,9 +59,9 @@ class NavBar extends HTMLElement {
     return `
         <nav class="navigation-bar">
             <ul class="menu">
-                <li class="active"> <img src="${GroupIconActive}" alt="Dashboard"> Dashboard</li>
+                <li> <img src="${GroupIcon}" alt="Dashboard"> Dashboard</li>
                 <li> <img src="${SkillsIcon}" alt="Skills"> Skills</li>
-                <li> <img src="${TeamIcon}" alt="Teams"> Teams</li>
+                <li class="active"> <img src="${TeamIcon}" alt="Teams"> Teams</li>
                 <li> <img src="${SettingsIcon}" alt="Settings"> Settings</li>
             </ul> 
             

@@ -94,7 +94,7 @@ export default class TeamTable extends Component {
               members.map(member => (
                 <tr key={member.username}>
                   <td>
-                    <a href={`/teams/${_.lowerCase(member.team)}/${member.username}?username=${member.username}`}>
+                    <a href={`/teams/${_.lowerCase(member.team)}/${member.username}`}>
                       <img className="user-profile" src={member.picture} alt={member.name}/>
                       <div className="user-info">
                         <div className="user-name">

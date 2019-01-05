@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 
 import '../components/custom-elements/NavBar/index';
@@ -9,6 +10,12 @@ import Logo from '../assets/logo.svg';
 import Caret from '../assets/union.svg';
 
 class Layout extends Component {
+  getBreadCrumbs() {
+    const crumbs = _.without(window.location.pathname.split("/").map(crumb => _.capitalize(crumb.trim())), "");
+
+    return _.join(crumbs, ",");
+  }
+
   render() {
     const { user, children } = this.props;
 
@@ -17,7 +24,7 @@ class Layout extends Component {
         <bread-crumbs
           title="Regle"
           icon={Logo}
-          path="Dashboard,Team,samuel.kubai@andela.com"
+          path={this.getBreadCrumbs()}
         >
         </bread-crumbs>
 

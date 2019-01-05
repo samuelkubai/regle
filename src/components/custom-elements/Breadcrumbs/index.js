@@ -45,10 +45,14 @@ class BreadCrumbs extends HTMLElement {
 
   composeBreadcrumb(paths) {
     let breadcrumbElement = ``;
-    paths.map((path, index) => `<li>${path}</li> ${BreadCrumbs.getDivider(paths, index)}`).forEach(tag => breadcrumbElement = breadcrumbElement + tag);
+    paths.map((path, index) => `
+        <li>${path}</li> 
+        ${BreadCrumbs.getDivider(paths, index)}
+    `).forEach(tag => breadcrumbElement = breadcrumbElement + tag);
 
     return breadcrumbElement;
   }
+
   get template() {
     return `
         <div class="breadcrumbs-container">
@@ -82,7 +86,7 @@ class BreadCrumbs extends HTMLElement {
             width: 30px;
             height: 30px;
             
-            margin-right: 4px;
+            margin-right: 8px;
           }
           
           .breadcrumbs-container {

@@ -7,12 +7,13 @@ import './style.css';
 
 export default class Fellow extends Component {
   render() {
+    const { username } = this.props.match.params;
 
     return (
       <Fragment>
-        <FellowStatsBanner/>
+        <FellowStatsBanner username={username}/>
 
-        <FellowSkillsBreakdown/>
+        <FellowSkillsBreakdown username={username}/>
       </Fragment>
     );
   }

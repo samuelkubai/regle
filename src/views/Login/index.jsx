@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cookie from 'cookies-js';
 
 // Import related components
 import VideoPlayer from '../../components/VideoPlayer';
@@ -12,9 +13,30 @@ import BackgroundImage from '../../assets/login-background.png'
 import './style.css';
 
 export default class Login extends Component {
-  render() {
-    console.log(BackgroundImage);
+  componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
 
+    const token = urlParams.get('token');
+
+    if (token) {
+      Cookie.set('jwt-token', token);
+
+      // FIX: Make this more dynamic
+      this.redirect();
+    }
+  }
+
+  redirect() {
+    const {  history } = this.props;
+
+    history.push('/teams/travela');
+  }
+
+  login() {
+    window.location.replace(`${process.env.REACT_APP_ANDELA_AUTH_HOST}/login?redirect_url=${process.env.REACT_APP_AUTH_REDIRECT_URL}`);
+  }
+
+  render() {
     const login_styles = {
       backgroundImage: `url(${BackgroundImage})`,
       backgroundRepeat: `no-repeat`,
@@ -40,7 +62,7 @@ export default class Login extends Component {
                 </div>
               </div>
 
-              <div className="login__button">
+              <div className="login__button" role="presentation" onClick={this.login}>
                 <div className="login__button--logo">
                   <img src={GoogleIcon} alt="Google"/>
                 </div>

@@ -50,3 +50,7 @@ button.active {
 button.rounded {
     border-radius: 50%;
 }
+
+button img {
+    padding-left: 4px;
+}

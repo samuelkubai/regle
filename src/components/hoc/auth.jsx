@@ -11,9 +11,11 @@ export default function(ComposedComponent) {
     componentDidMount() {
       const user = Auth.verifyToken();
 
-      if (user) {
-        this.setState(state => { return {...state, user, isLoaded: true} });
+      if (!user) {
+        window.location.replace(`${window.location.origin}`);
       }
+
+      this.setState(state => { return {...state, user, isLoaded: true} });
     }
 
     render() {
