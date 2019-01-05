@@ -57,6 +57,26 @@ jobs:
           command: yarn run build
       - *persist_to_workspace
 
+  deployment:
+    <<: *defaults
+
+    steps:
+      - setup_remote_docker
+      - *attach_workspace
+      - run:
+          name: Install K8s Deployment Scripts
+          command: sudo npm install -g rok8s-scripts
+      - run:
+          name: Make deploy script Executable
+          command: |
+            chmod +x .circleci/build_deploy.sh
+            chmod +x .circleci/setup_k8s.sh
+      - run:
+          name: Prepare Kubectl Installation
+          command: .circleci/setup_k8s.sh main
+      - run:
+          name: Build and Deploy Application
+          command: .circleci/build_deploy.sh main
 
 workflows:
   version: 2
