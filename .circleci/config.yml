@@ -25,22 +25,24 @@ jobs:
   checkout_code:
     <<: *defaults
 
-    - checkout
-    - *attach_workspace
-    # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "package.json" }}
-        # fallback to using the latest cache if no exact match is found
-        - v1-dependencies-
-    - *install_npm_packages
-    - save_cache:
-        paths:
-          - node_modules
-        key: v1-dependencies-{{ checksum "package.json" }}
-    - *persist_to_workspace
+    steps:
+      - checkout
+      - *attach_workspace
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - *install_npm_packages
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - *persist_to_workspace
   build:
     <<: *defaults
+
     steps:
       - setup_remote_docker
       - *attach_workspace
