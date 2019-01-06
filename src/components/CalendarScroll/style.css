@@ -23,6 +23,10 @@
     cursor: pointer;
 }
 
+.icon.disabled {
+    cursor: not-allowed !important;
+}
+
 ul.calendar__scroll {
     display: flex;
     align-items: flex-start;

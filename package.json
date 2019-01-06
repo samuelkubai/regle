@@ -9,6 +9,7 @@
     "cookies-js": "^1.2.3",
     "date-fns": "^1.29.0",
     "jsonwebtoken": "^8.4.0",
+    "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-chartkick": "^0.3.0",

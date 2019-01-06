@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 // Import assets
 import ScrollRight from '../../assets/scroll-right.svg';
@@ -8,116 +9,93 @@ import ScrollLeft from '../../assets/scroll-left.svg';
 import './style.css';
 
 export default class CalendarScroll extends Component {
+  state = {
+    duration: 24,
+    selectedDate: moment()
+  };
+
+  moveToTomorrow = () => {
+    const { selectedDate } = this.state;
+
+    if (!this.disableNextIcon()) {
+      this.setState(state => {
+        return {
+          ...state,
+          selectedDate: moment(selectedDate).add('days', 1)
+        }
+      });
+    }
+  };
+
+  moveToYesterday = () => {
+    const { selectedDate } = this.state;
+
+    this.setState(state => {
+      return {
+        ...state,
+        selectedDate: moment(selectedDate).subtract('days', 1)
+      }
+    });
+  };
+
+  disableNextIcon = () => {
+    const { selectedDate } = this.state;
+
+    return !(moment().diff(selectedDate, 'days') > 0);
+  };
+
+  renderSelectedDate() {
+    const { selectedDate } = this.state;
+
+    return (
+      <div className="title">
+        { selectedDate.format('MMMM D')}, <span className="subtle">{ selectedDate.format('dddd') }</span>
+      </div>
+    );
+  }
+
+  renderDateRange() {
+    const { duration, selectedDate } = this.state;
+    let date_range = [];
+
+    for (let day = 0; day < duration; day++) {
+      let current_date = moment(selectedDate).subtract('days', day);
+
+      date_range.unshift(
+        (
+          <li className={ moment(selectedDate).diff(current_date, 'days') === 0 ? 'active selected' : ''}
+              onClick={() => {
+                this.setState(state => {
+                  return {
+                    ...state,
+                    selectedDate: current_date
+                  }
+                })
+              }}
+              key={day}
+          >
+            <div className="day">{ current_date.format('dddd')[0] }</div>
+            <div className="date">{ current_date.format('D') }</div>
+          </li>
+        )
+      );
+    }
+
+    return date_range;
+  }
   render() {
     return (
       <div className="calendar-scroll">
-        <div className="title">
-          December 6, <span className="subtle">Friday</span>
-        </div>
+        { this.renderSelectedDate()}
 
         <div className="calendar">
-          <img className="icon" src={ScrollLeft} alt="Left"/>
+          <img onClick={this.moveToYesterday} role="presentation" className="icon"  src={ScrollLeft} alt="Previous"/>
 
           <ul className="calendar__scroll">
-            <li>
-              <div className="day">S</div>
-              <div className="date">1</div>
-            </li>
-            <li>
-              <div className="day">M</div>
-              <div className="date">2</div>
-            </li>
-            <li>
-              <div className="day">T</div>
-              <div className="date">3</div>
-            </li>
-            <li>
-              <div className="day">W</div>
-              <div className="date">4</div>
-            </li>
-            <li>
-              <div className="day">T</div>
-              <div className="date">5</div>
-            </li>
-            <li className="active selected">
-              <div className="day">F</div>
-              <div className="date">6</div>
-            </li>
-            <li>
-              <div className="day">S</div>
-              <div className="date">7</div>
-            </li>
-            <li>
-              <div className="day">S</div>
-              <div className="date">8</div>
-            </li>
-            <li>
-              <div className="day">M</div>
-              <div className="date">9</div>
-            </li>
-            <li>
-              <div className="day">T</div>
-              <div className="date">10</div>
-            </li>
-            <li>
-              <div className="day">W</div>
-              <div className="date">11</div>
-            </li>
-            <li>
-              <div className="day">T</div>
-              <div className="date">12</div>
-            </li>
-            <li>
-              <div className="day">F</div>
-              <div className="date">13</div>
-            </li>
-            <li>
-              <div className="day">S</div>
-              <div className="date">14</div>
-            </li>
-            <li>
-              <div className="day">S</div>
-              <div className="date">15</div>
-            </li>
-            <li>
-              <div className="day">M</div>
-              <div className="date">16</div>
-            </li>
-            <li>
-              <div className="day">T</div>
-              <div className="date">17</div>
-            </li>
-            <li>
-              <div className="day">W</div>
-              <div className="date">18</div>
-            </li>
-            <li>
-              <div className="day">T</div>
-              <div className="date">19</div>
-            </li>
-            <li>
-              <div className="day">F</div>
-              <div className="date">20</div>
-            </li>
-            <li>
-              <div className="day">S</div>
-              <div className="date">21</div>
-            </li>
-            <li>
-              <div className="day">S</div>
-              <div className="date">22</div>
-            </li>
-            <li>
-              <div className="day">M</div>
-              <div className="date">23</div>
-            </li>
-            <li className="active">
-              <div className="day">T</div>
-              <div className="date">24</div>
-            </li>
+            {this.renderDateRange()}
           </ul>
 
-          <img className="icon" src={ScrollRight} alt="Right"/>
+          <img onClick={this.moveToTomorrow} role="presentation" className={this.disableNextIcon() ? 'icon disabled' : 'icon'} src={ScrollRight} alt="Next"/>
         </div>
       </div>
     )
