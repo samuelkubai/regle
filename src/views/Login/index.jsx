@@ -55,7 +55,7 @@ export default class Login extends Component {
             <div className="content__login">
               <div className="login__message">
                 <div className="login__message--text">
-                  Measure anything....
+                  Track your growth....
                 </div>
                 <div className="login__message--text">
                   you can improve everything.
