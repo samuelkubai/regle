@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Import assets
-import MembersIcon from '../../assets/team.svg';
+import MembersIcon from '../../assets/team-blue.svg';
 import RepositoriesIcon from '../../assets/github.svg';
 import SkillsIcon from '../../assets/skills.svg';
 import TargetIcon from '../../assets/target.svg';
