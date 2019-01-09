@@ -19,9 +19,9 @@ export default class FellowSkillsBreakdown extends Component {
 
   async componentDidMount() {
     const { REACT_APP_API_URL } = process.env;
-    const { username } = this.props;
+    const { email } = this.props;
 
-    const response = await fetch(`${REACT_APP_API_URL}/velocity?username=${username}`)
+    const response = await fetch(`${REACT_APP_API_URL}/velocity?email=${email}`)
       .then(res => res.json());
 
     this.setState(state => {

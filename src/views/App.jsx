@@ -22,7 +22,7 @@ export default class App extends Component {
               <Layout>
                 <Switch>
                   <Route path="/teams/:team" exact component={Team} />
-                  <Route path="/teams/:team/:username" exact component={Fellow} />
+                  <Route path="/teams/:team/:email" exact component={Fellow} />
                 </Switch>
               </Layout>
             </Route>

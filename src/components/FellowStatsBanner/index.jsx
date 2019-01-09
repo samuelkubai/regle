@@ -13,11 +13,11 @@ export default class FellowStatsBanner extends Component {
 
   async componentDidMount() {
     const { REACT_APP_API_URL } = process.env;
-    const { username } = this.props;
+    const { email } = this.props;
     const token = Cookie.get('jwt-token');
 
     const response = await axios.get(
-      `${REACT_APP_API_URL}/analytics?username=${username}`,
+      `${REACT_APP_API_URL}/analytics?email=${email}`,
       { headers: { Authorization: `${token}` } }
     );
 
