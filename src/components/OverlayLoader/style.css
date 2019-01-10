@@ -1,0 +1,33 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 252, 243, 0.9);
+    color: #153C55;
+    z-index: 1000;
+}
+
+.center-piece {
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+
+    color: #153C55;
+}
+
+
+/* Overrides */
+.loader {
+    margin-bottom: 24px;
+}
+
+.line-scale > div {
+    background-color: #153C55 !important;
+}

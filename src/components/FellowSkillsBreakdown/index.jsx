@@ -19,7 +19,7 @@ export default class FellowSkillsBreakdown extends Component {
 
   async componentDidMount() {
     const { REACT_APP_API_URL } = process.env;
-    const { email } = this.props;
+    const { completed, email } = this.props;
 
     const response = await fetch(`${REACT_APP_API_URL}/velocity?email=${email}`)
       .then(res => res.json());
@@ -31,6 +31,8 @@ export default class FellowSkillsBreakdown extends Component {
         meta: response.meta
       }
     });
+
+    completed();
   }
 
   render() {

@@ -13,7 +13,7 @@ export default class FellowStatsBanner extends Component {
 
   async componentDidMount() {
     const { REACT_APP_API_URL } = process.env;
-    const { email } = this.props;
+    const { completed, email } = this.props;
     const token = Cookie.get('jwt-token');
 
     const response = await axios.get(
@@ -22,7 +22,6 @@ export default class FellowStatsBanner extends Component {
     );
 
     const analytics = response.data;
-    console.log(analytics);
     this.setState(state => {
       return {
         ...state,
@@ -30,6 +29,8 @@ export default class FellowStatsBanner extends Component {
         meta: analytics.meta
       }
     });
+
+    completed();
   }
 
   render () {
