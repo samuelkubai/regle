@@ -26,7 +26,7 @@
     background: #0083CD;
 }
 
-button {
+.video-player > button {
     height: 70px;
     width: 70px;
 
@@ -43,14 +43,14 @@ button {
     outline: none;
 }
 
-button.active {
+.video-player > button.active {
     background: #0083CD;
 }
 
-button.rounded {
+.video-player > button.rounded {
     border-radius: 50%;
 }
 
-button img {
+.video-player > button img {
     padding-left: 4px;
 }

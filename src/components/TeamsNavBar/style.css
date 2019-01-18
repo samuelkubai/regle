@@ -4,7 +4,7 @@
     justify-content: space-between;
 
     border: 1px solid #DFE6EB;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     margin: 32px 79px 0;
 }
 

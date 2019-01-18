@@ -10,13 +10,14 @@ import './style.css'
 
 export default class Team extends Component {
   render() {
+    const { history } = this.props;
+
     return (
       <Fragment>
         <div className="navbar-divider">
         </div>
         <TeamsNavBar />
-        <CalendarScroll />
-        <TeamTable />
+        <TeamTable history={history} />
       </Fragment>
 
     );

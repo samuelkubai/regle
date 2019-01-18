@@ -1,8 +1,6 @@
-.team-table {
-    margin: 32px 79px 100px;
-}
+.team-table__container {}
 
-.team-table__header {
+.team-table__banner {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,6 +8,7 @@
     background: #EDF8FF;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+    margin: 0 79px;
     padding: 22px 0 12px;
 }
 
@@ -42,6 +41,99 @@
 
 .team-table__stat-against {
     font-size: 16px;
+}
+
+.team-table {
+    background: #FFFFFF;
+    border: 1px solid #DFE6EB;
+    margin: 0 79px 100px;
+}
+
+.team-table__filter {
+    height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 32px;
+}
+
+.team-table__filter > button {
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 4px;
+    color: #153C55;
+    cursor: pointer;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    outline: none;
+    padding: 4px 8px;
+}
+
+.team-table__filter > button:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.team-table__filter > button > img {
+    margin-right: 8px;
+}
+
+.team-table__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    background: #F8F9FA;
+    padding: 0 32px;
+}
+
+.table__header--column {
+    color: #153C55;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 23px 0;
+    text-align: left;
+}
+
+.team-table__row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    border-bottom: 1px solid #DFE6EB;
+    padding: 21px 32px;
+}
+
+.team-table__row:hover {
+    cursor: pointer;
+    background: #F8F9FA;
+    box-shadow: inset 0 0 4px rgba(133, 149, 169, 0.25);
+}
+
+.team-table__row-column {
+    font-weight: 600;
+    font-size: 14px;
+
+    color: #153C55;
+}
+
+.team-table__row-column > a {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    color: #153C55;
+    text-decoration: none;
+}
+
+.team-table__row-column__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 table {
@@ -103,7 +195,7 @@ td a {
 tr:not(.table__header) td {
     font-size: 14px;
     font-weight: 600;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 tr:not(.table__header) td:first-child {
@@ -117,13 +209,16 @@ td.right-align {
 }
 
 tr:not(.table__header) td:last-child {
-    display: table-cell;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    text-align: right;
-    text-align: -webkit-right;
-    padding: 24px 32px !important;
+    padding: 0 32px !important;
 }
 
+tr:not(.table__header) td:last-child > p, tr:not(.table__header) td:last-child > img {
+    margin-top: -23px;
+}
 .badge {
     width: 101px;
     height: 35px;

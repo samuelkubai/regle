@@ -3,9 +3,13 @@ import _ from 'lodash';
 
 // Import related components
 import OverlayLoader from '../OverlayLoader';
+import InviteUserOverlay from '../InviteUserOverlay';
 
 // Import component assets
 import CaretIcon from '../../assets/caret-both.svg';
+import FilterIcon from '../../assets/filter.svg';
+import AddIcon from '../../assets/add.svg';
+import EllipsisIcon from '../../assets/ellipsis-icon.svg';
 
 // Import component styles
 import './style.css';
@@ -14,6 +18,7 @@ import Cookie from "cookies-js";
 
 export default class TeamTable extends Component {
   state = {
+    invitingUser: false,
     loaded: false,
     members: [],
     team_stats: {
@@ -60,15 +65,33 @@ export default class TeamTable extends Component {
     }
   }
 
+  redirect(path) {
+    const { history } = this.props;
+    history.push(path);
+  }
+
+  toggleUserInvite = () => {
+    this.setState(state => {
+      return {
+        ...state,
+        invitingUser: !state.invitingUser
+      }
+    })
+  };
+
   render() {
-    const { loaded, members, meta, team_stats } = this.state;
+    const { loaded, invitingUser, members, meta, team_stats } = this.state;
 
     return (
       <Fragment>
-        {!loaded ? <OverlayLoader/> : ''}
+        {/*{!loaded ? <OverlayLoader/> : ''}*/}
 
-        <div className="team-table">
-          <div className="team-table__header">
+        {invitingUser ? <InviteUserOverlay title="Invite a new fellow" onCompleted={() => {
+          this.toggleUserInvite()
+        }} />: ''}
+
+        <div className="team-table__container">
+          <div className="team-table__banner">
             <div className="team-table__stat">
               <div className="team-table__stat-title">Fellows ready</div>
               <div className="team-table__stat-container">
@@ -98,23 +121,35 @@ export default class TeamTable extends Component {
             </div>
           </div>
 
-          <table>
-            <thead>
-              <tr className="table__header">
-                <td>Fellow <img src={CaretIcon} alt="Toggle"/></td>
-                <td>Readiness <img src={CaretIcon} alt="Toggle"/></td>
-                <td>Learning velocity <img src={CaretIcon} alt="Toggle"/></td>
-                <td>Mastered skills <img src={CaretIcon} alt="Toggle"/></td>
-                <td>Team <img src={CaretIcon} alt="Toggle"/></td>
-                <td className="right-align">Status <img src={CaretIcon} alt="Toggle"/></td>
-              </tr>
-            </thead>
+          <div className="team-table">
+            <div className="team-table__filter">
+              <button className="team-table__button">
+                <img src={FilterIcon} alt="Filter"/>
+                Filter
+              </button>
 
-            <tbody>
+              <button className="team-table__button" onClick={() => {
+                this.toggleUserInvite()
+              }}>
+                <img src={AddIcon} alt="Invite"/>
+                Invite Member
+              </button>
+            </div>
+
+            <div className="team-table__header">
+              <div className="table__header--column" style={{ width: '278px' }}>Fellow</div>
+              <div className="table__header--column" style={{ width: '192px' }}>Readiness</div>
+              <div className="table__header--column" style={{ width: '211px' }}>Velocity</div>
+              <div className="table__header--column" style={{ width: '201px' }}>Mastery</div>
+              <div className="table__header--column" style={{ width: '161px' }}>Team</div>
+              <div className="table__header--column" style={{ width: '205px' }}>Status</div>
+            </div>
+
+            <div className="team-table__body">
               {
                 members.map(member => (
-                  <tr key={member.email}>
-                    <td>
+                  <div className="team-table__row" key={member.email} onClick={() => { this.redirect(`/teams/${_.lowerCase(member.team)}/${member.email}`) }}>
+                    <div className="team-table__row-column" style={{ width: '278px' }}>
                       <a href={`/teams/${_.lowerCase(member.team)}/${member.email}`}>
                         <img className="user-profile" src={member.picture} alt={member.name}/>
                         <div className="user-info">
@@ -126,21 +161,23 @@ export default class TeamTable extends Component {
                           </div>
                         </div>
                       </a>
-                    </td>
-                    <td>{member.readiness}</td>
-                    <td>{member.velocity}</td>
-                    <td>{member.skills}</td>
-                    <td>{member.team}</td>
-                    <td className="right-align">
+                    </div>
+                    <div className="team-table__row-column" style={{ width: '192px' }}>{member.readiness}</div>
+                    <div className="team-table__row-column" style={{ width: '211px' }}>{member.velocity}</div>
+                    <div className="team-table__row-column" style={{ width: '201px' }}>{member.skills}</div>
+                    <div className="team-table__row-column" style={{ width: '161px' }}>{member.team}</div>
+                    <div className="team-table__row-column team-table__row-column__actions" style={{ width: '205px' }}>
                       <p className={`badge ${this.badgeClass(member.status)}`}>
                         {_.capitalize(member.status.replace("-", " "))}
                       </p>
-                    </td>
-                  </tr>
+
+                      <img src={EllipsisIcon} alt="Menu"/>
+                    </div>
+                  </div>
                 ))
               }
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </Fragment>
     );
