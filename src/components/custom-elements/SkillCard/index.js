@@ -45,7 +45,7 @@ class SkillCard extends HTMLElement {
   getProgressWidth(skill, target) {
     const width = (skill/target)*100;
 
-    return width > 100 ? 100 : width;
+    return width > 100 ? 100 : width === 0 ? .5 : width;
   }
 
   getProgressColor(skill, target) {
@@ -93,8 +93,8 @@ class SkillCard extends HTMLElement {
             align-items: center;
             justify-content: space-between;
             
-            width: 916px;
-            height: 118px;
+            width: 100%;
+            height: 95px;
             
             box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
             box-sizing: border-box;
@@ -113,14 +113,18 @@ class SkillCard extends HTMLElement {
           align-items: center;
           justify-content: center;
           
-          width: 75px;
-          height: 75px;
+          width: 65px;
+          height: 65px;
           
           background: #EDF8FF;
           border-radius: 50%;
-          margin-right: 20px;
+          margin-right: 16px;
         }
         
+        .icon-container > img {
+            height: 32px;
+            width: 32px;
+        }
         .skill-score {
             display: flex;
             align-items: flex-end;
@@ -130,13 +134,13 @@ class SkillCard extends HTMLElement {
         }
         
         .skill-title {
-          font-size: 18px;
+          font-size: 14px;
           color: #153C55;
-          margin-bottom: 8px;
+          margin-bottom: 4px;
         }
         
         .skill-summary {
-          font-size: 14px;
+          font-size: 12px;
           color: #B5C4CF;
         }
         

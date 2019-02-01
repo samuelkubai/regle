@@ -8,7 +8,7 @@
     background: #EDF8FF;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    margin: 0 79px;
+    margin: 32px 79px;
     padding: 22px 0 12px;
 }
 
@@ -46,7 +46,9 @@
 .team-table {
     background: #FFFFFF;
     border: 1px solid #DFE6EB;
-    margin: 0 79px 100px;
+    border-top: 3px #153C55 solid;
+    border-radius: 4px;
+    margin: 0 16px;
 }
 
 .team-table__filter {
@@ -70,6 +72,7 @@
     font-weight: 600;
     font-size: 14px;
 
+    margin: 0;
     outline: none;
     padding: 4px 8px;
 }
@@ -109,7 +112,7 @@
 }
 
 .team-table__row:hover {
-    cursor: pointer;
+    /*cursor: pointer;*/
     background: #F8F9FA;
     box-shadow: inset 0 0 4px rgba(133, 149, 169, 0.25);
 }
@@ -135,6 +138,46 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.team-table__popover {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    flex-direction: column;
+
+    padding: 24px 0;
+}
+
+.team-table__popover__header {
+    color: #5C6B7B;
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+
+.team-table__popover__option {
+    color: #0083CD;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-decoration: none;
+}
+
+.team-table__popover__header, .team-table__popover__option {
+    padding: 0 14px;
+}
+
+.team-table__popover__divider {
+    background: #DFE6EB;
+    border: none;
+    height: 1px;
+    width: 100%;
+
+    margin: 8px 0 16px;
+}
+
 
 table {
     border-collapse: collapse;

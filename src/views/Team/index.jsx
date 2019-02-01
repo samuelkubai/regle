@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 
 // Import the team's components
-import TeamsNavBar from '../../components/TeamsNavBar';
-import CalendarScroll from '../../components/CalendarScroll';
-import TeamTable from '../../components/TeamTable';
+import MembersList from '../../components/MembersList';
+import MemberDetail from '../../components/MemberDetail';
 
 // Import styles
 import './style.css'
@@ -14,12 +13,12 @@ export default class Team extends Component {
 
     return (
       <Fragment>
-        <div className="navbar-divider">
+        <div className="pg-team__container">
+          <div className="pg-team__stroke"></div>
+          <MembersList {...this.props} />
+          <MemberDetail {...this.props} />
         </div>
-        <TeamsNavBar />
-        <TeamTable history={history} />
       </Fragment>
-
     );
   }
 }

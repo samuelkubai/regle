@@ -1,0 +1,154 @@
+.app-shell__container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.navbar-divider {
+    background: #EDF8FF;
+    height: 8px;
+    margin-bottom: 34px;
+    width: 100%;
+}
+
+.sidebar__container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    position: fixed;
+    top: 0;
+    z-index: 20;
+}
+
+.teams-selector__container {
+    background: #DFE6EB;
+    padding: 32px 12px;
+    height: 100vh;
+}
+
+.teams-selector__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.teams-selector__list li {
+    height: 35px;
+    width: 35px;
+
+    background: #fff;
+    border-radius: 4px;
+    color: #153C55;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-selector__team {
+    position: relative;
+}
+
+.team-selector__team.team-selector__team--active::after {
+    width: 3px;
+    height: 31px;
+
+    position: absolute;
+    left: -12px;
+
+    background: #153C55;
+    border-radius: 0 4px 4px 0;
+    content: " ";
+}
+
+.menu-bar__container {
+    background: #0068A6;
+    min-width: 171px;
+    height: 100vh;
+}
+
+.user-toggle__container {
+    background: #004873;
+    padding: 16px 12px;
+}
+
+.profile-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #F8F9FA;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    font-weight: 300;
+}
+
+.profile-dropdown__image {
+    height: 30px;
+    width: 30px;
+
+    border: 1px solid #F8F9FA;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-dropdown__name {
+    flex: 1;
+}
+
+.profile-dropdown__icon {
+    margin-left: 8px;
+}
+
+
+/* Menu bar styles */
+.menu-bar {
+    color: #FFFFFF;
+    list-style: none;
+    margin: 0;
+    padding: 17px 0;
+}
+
+.menu-bar__title {
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.menu-bar__title:not(:first-child) {
+    margin-top: 32px;
+}
+
+.menu-bar__item {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.menu-bar__item.menu-bar__item--active {
+    background: #4FA3DD;
+    border-right: 2px solid #FFF;
+}
+
+.menu-bar__title, .menu-bar__item {
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+/* Content styles */
+.content__container {
+    width: 100%;
+
+    margin-left: calc(171px + 58px + 1px);
+}

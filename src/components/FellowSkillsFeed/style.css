@@ -3,9 +3,9 @@
     align-items: flex-start;
     justify-content: space-between;
 
-    margin-top: 96px;
-    margin-bottom: 65px;
-    padding: 0 79px;
+    margin-top: 48px;
+    margin-bottom: 14px;
+    padding: 0 24px;
 }
 
 .skills-filters {
@@ -38,6 +38,10 @@
 
 custom-checkbox {
     margin: 0 0 14px 14px;
+}
+
+.skills-list {
+    width: 100%;
 }
 
 skill-card {

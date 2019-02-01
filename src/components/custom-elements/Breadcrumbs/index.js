@@ -60,8 +60,9 @@ class BreadCrumbs extends HTMLElement {
                 <img src="${this.icon}" alt="${this.title}"> 
                 <div class="">${this.title}</div>
             </div>
-            <ul class="breadcrumbs-list">
-                ${this.composeBreadcrumb(this.paths)}
+            <ul class="breadcrumbs-list">` +
+                // ${this.composeBreadcrumb(this.paths)}
+      `
             </ul>   
         </div>
     `;
@@ -95,7 +96,7 @@ class BreadCrumbs extends HTMLElement {
             justify-content: space-between;
             
             height: 59px;
-            padding: 0 79px;
+            padding: 0 16px;
           }
           
           .breadcrumbs-list {

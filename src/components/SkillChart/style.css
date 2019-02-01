@@ -1,6 +1,6 @@
 .skill-chart {
     margin-top: 32px;
-    padding: 0 79px;
+    padding: 0 24px;
 }
 
 .skill-chart__header {
@@ -10,8 +10,7 @@
 }
 
 .skill-chart__title {
-    font-size: 18px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .skill-chart__body {

@@ -17,7 +17,7 @@ spec:
           imagePullPolicy: Always
           command:
             - node
-            - index.js
+            - index.jsx
           ports:
           - containerPort: {{ PORT }}
             name: http

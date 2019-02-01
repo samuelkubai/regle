@@ -149,13 +149,13 @@ export default class InviteUserOverlay extends Component {
           </div>
 
           <div className="modal__footer">
-            <button className="white-btn" onClick={() => {
+            <button className="btn--raised white-btn" onClick={() => {
               onCompleted()
             }}>
               Cancel
             </button>
 
-            <button onClick={this.inviteUser} className="action-btn">
+            <button onClick={this.inviteUser} className="btn--raised action-btn">
               Invite
             </button>
           </div>

@@ -4,7 +4,7 @@ import FellowStatsBanner from "../../components/FellowStatsBanner";
 import FellowSkillsBreakdown from "../../components/FellowSkillsBreakdown/index";
 import OverlayLoader from '../../components/OverlayLoader';
 
-import './style.css';
+// import './style.css';
 
 export default class Fellow extends Component {
   state = {

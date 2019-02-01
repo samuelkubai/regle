@@ -85,7 +85,7 @@ class CalendarPicker extends HTMLElement {
             ${this.start} - ${this.end}
           </div>
           
-          <img src="${this.icon}" alt="Calendar Icon">
+          <img class="calendar-picker__icon" src="${this.icon}" alt="Calendar Icon">
         </div>
         
         <div id="calendar-container" class="calendar-container ${this.show ? 'calendar-container--open' : 'calendar-container--closed'}">
@@ -108,16 +108,15 @@ class CalendarPicker extends HTMLElement {
           justify-content: space-between;
           
           position: relative;
-          height: 45px;
-          width: 261px;
+          width: 260px;
           
           border: 1px solid #CDD6DF;
           box-sizing: border-box;
-          padding: 12px 8px;
+          padding: 8px 8px;
           
           color: #B5C4CF;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 12px;
           text-align: left;
         }
         
@@ -129,6 +128,11 @@ class CalendarPicker extends HTMLElement {
           box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
           visibility: hidden;
           z-index: 100;
+        }
+        
+        .calendar-picker__icon {
+            width: 16px;
+            height: 16px;
         }
         
         .calendar-container.calendar-container--open {

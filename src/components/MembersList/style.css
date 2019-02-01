@@ -1,0 +1,156 @@
+.members-list__container {
+    min-width: 298px;
+    height: 100vh;
+
+    position: fixed;
+    left: 229px;
+    top: 0;
+
+    box-shadow: 0 2px 4px rgba(30, 40, 52, 0.25);
+    overflow-y: scroll;
+}
+
+
+.members-list__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 0 0 12px;
+}
+
+.members-list__title {
+    font-weight: 600;
+    font-size: 12px;
+
+    color: #153C55;
+}
+
+.members-list__actions img {
+    cursor: pointer;
+    margin-right: 12px;
+
+    height: 16px;
+    width: 16px;
+}
+
+.members-list__list {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.members-list__member {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #DFE6EB;
+    cursor: pointer;
+    padding: 24px 8px 12px 12px;
+}
+
+.members-list__member:hover {
+    background: #F8F9FA;
+}
+
+.user-profile__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex: 1;
+}
+
+.user-profile {
+    height: 35px;
+    width: 35px;
+
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.user-name {
+    color: #153C55;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.user-phase {
+    color: #B5C4CF;
+    font-size: 12px;
+}
+
+.badge {
+    width: 75px;
+    height: 31px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 0;
+}
+
+.badge--ready {
+    background: #93F0EC;
+    color: #004644;
+}
+
+.badge--on-track {
+    background: #FFF3D4;
+    color: #5F4700;
+}
+
+.badge--off-track {
+    background: #FFA5A7;
+    color: #6A0F14;
+}
+
+.popover__container {
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+
+.members-list__popover {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    flex-direction: column;
+
+    padding: 24px 0;
+}
+
+.members-list__popover__header {
+    color: #5C6B7B;
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+
+.members-list__popover__option {
+    color: #0083CD;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-decoration: none;
+}
+
+.members-list__popover__header, .members-list__popover__option {
+    padding: 0 14px;
+}
+
+.members-list__popover__divider {
+    background: #DFE6EB;
+    border: none;
+    height: 1px;
+    width: 100%;
+
+    margin: 8px 0 16px;
+}
+

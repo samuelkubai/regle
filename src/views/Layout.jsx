@@ -5,9 +5,9 @@ import '../components/custom-elements/NavBar/index';
 import '../components/custom-elements/Breadcrumbs/index';
 
 import AuthHOC from '../components/hoc/auth';
+import Shell from '../components/Shell';
 
-import Logo from '../assets/logo.svg';
-import Caret from '../assets/union.svg';
+import TravelaLogo from '../assets/travela.svg';
 
 class Layout extends Component {
   getBreadCrumbs() {
@@ -20,23 +20,11 @@ class Layout extends Component {
     const { user, children } = this.props;
 
     return (
-      <Fragment>
-        <bread-crumbs
-          title="Regle"
-          icon={Logo}
-          path={this.getBreadCrumbs()}
-        >
-        </bread-crumbs>
-
-        { children }
-
-        <nav-bar
-          profile-name={user.UserInfo.name}
-          profile-image={user.UserInfo.picture}
-          chevron-down={Caret}
-        >
-        </nav-bar>
-      </Fragment>
+      <Shell avatar={user.UserInfo.picture} username={user.UserInfo.name}>
+        <Fragment>
+          { children }
+        </Fragment>
+      </Shell>
     );
   }
 }

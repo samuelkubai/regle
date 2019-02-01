@@ -2,8 +2,11 @@ import axios from 'axios';
 import Cookie from 'cookies-js';
 import React, { Component } from 'react';
 
+// Import the component's assets
 import ArrowUp from '../../assets/arrow-pointing-to-up.svg';
 import ArrowDown from '../../assets/arrow-pointing-to-down.svg';
+
+import "./style.css";
 
 export default class FellowStatsBanner extends Component {
   state = {
@@ -12,6 +15,16 @@ export default class FellowStatsBanner extends Component {
   };
 
   async componentDidMount() {
+    await this.loadData();
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (this.props.email !== prevProps.email) {
+      await this.loadData();
+    }
+  }
+
+  async loadData() {
     const { REACT_APP_API_URL } = process.env;
     const { completed, email } = this.props;
     const token = Cookie.get('jwt-token');

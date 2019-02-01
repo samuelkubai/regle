@@ -1,9 +1,9 @@
 .overlay {
     position: fixed;
     top: 0;
-    left: 0;
+    left: calc(229px + 299px);
     right: 0;
-    bottom: 62px;
+    bottom: 0;
 
     display: flex;
     align-items: center;
@@ -11,7 +11,7 @@
 
     background: rgba(255, 252, 243, 0.9);
     color: #153C55;
-    z-index: 1000;
+    z-index: 10;
 }
 
 .center-piece {

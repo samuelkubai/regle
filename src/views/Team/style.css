@@ -1,5 +1,44 @@
-.navbar-divider {
-    background: #EDF8FF;
+.pg-team__container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding-top: 8px;
+}
+
+.pg-team__stroke {
+    position: absolute;
+    top: 0;
+    right: 0;
     height: 8px;
-    width: 100vw;
+    left: 229px;
+
+    background: #153C55;
+    z-index: 20;
+}
+
+.team-header__container {
+    padding: 14px 16px 24px;
+
+}
+
+.team-header__title {
+    color: #153C55;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.team-header__stats {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+
+    color: #8595A9;
+    font-size: 12px;
+    font-weight: 600;
+
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
 }

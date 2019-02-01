@@ -44,7 +44,7 @@ export default class CalendarPicker extends Component {
       <DateRangePicker
         onChange={this.handleRangeChange}
         className="PreviewArea"
-        months={2}
+        months={1}
         minDate={addDays(new Date(), -300)}
         maxDate={addDays(new Date(), 900)}
         direction="horizontal"

@@ -1,23 +1,20 @@
-import React, {Component, Fragment} from 'react';
 import _ from 'lodash';
+import React, {Component, Fragment} from "react";
+import Cookie from "cookies-js";
+import axios from "axios/index";
 
-// Import related components
+// Import components
 import Popover from '../Popover';
 import OverlayLoader from '../OverlayLoader';
 import InviteUserOverlay from '../InviteUserOverlay';
 
-// Import component assets
-import CaretIcon from '../../assets/caret-both.svg';
-import FilterIcon from '../../assets/filter.svg';
-import AddIcon from '../../assets/add.svg';
+// Import the component's assets
+import "./style.css";
+import AddIcon from "../../assets/add.svg";
+import FilterIcon from "../../assets/filter-outline.svg";
 import EllipsisIcon from '../../assets/ellipsis-icon.svg';
 
-// Import component styles
-import './style.css';
-import axios from "axios/index";
-import Cookie from "cookies-js";
-
-export default class TeamTable extends Component {
+export default class MembersList extends Component {
   state = {
     activePopovers: {},
     invitingUser: false,
@@ -123,7 +120,8 @@ export default class TeamTable extends Component {
     })
   };
 
-  render() {
+  render () {
+    const { match: { params: { team }} } = this.props;
     const { loaded, invitingUser, members, meta, team_stats, activePopovers } = this.state;
 
     return (
@@ -134,56 +132,49 @@ export default class TeamTable extends Component {
           this.toggleUserInvite()
         }} />: ''}
 
-        <div className="team-table__container">
-          <div className="team-table">
-            <div className="team-table__filter">
-              <button className="team-table__button">
-                <img src={FilterIcon} alt="Filter"/>
-                Filter
-              </button>
+        <div className="members-list__container">
+          <div className="members-list__header">
+            <div className="members-list__title">
+              Members List (2 Filters)
+            </div>
 
-              <button className="team-table__button" onClick={() => {
+            <div className="members-list__actions">
+              <img src={AddIcon} alt="Invite" onClick={() => {
                 this.toggleUserInvite()
-              }}>
-                <img src={AddIcon} alt="Invite"/>
-                Invite Member
-              </button>
+              }}/>
+              <img src={FilterIcon} alt="Filter"/>
             </div>
+          </div>
 
-            <div className="team-table__header">
-              <div className="table__header--column" style={{ width: '278px' }}>Fellow</div>
-              <div className="table__header--column" style={{ width: '192px' }}>Readiness</div>
-              <div className="table__header--column" style={{ width: '211px' }}>Velocity</div>
-              <div className="table__header--column" style={{ width: '201px' }}>Mastery</div>
-              <div className="table__header--column" style={{ width: '205px' }}>Status</div>
-            </div>
-
-            <div className="team-table__body">
-              {
-                members.map(member => (
-                  <div className="team-table__row" key={member.email}
-                       // onClick={() => { this.redirect(`/teams/${_.lowerCase(member.team)}/${member.email}`) }}
+          <ul className="members-list__list">
+            {
+              members.map(member => {
+                return (
+                  <li key={member.email}
+                      className="members-list__member"
+                      onClick={() => {
+                        this.redirect(`/teams/${team}/members/${member.email}`)
+                      }}
                   >
-                    <div className="team-table__row-column" style={{ width: '278px' }}>
-                      <a href={`/teams/${_.lowerCase(member.team)}/${member.email}`}>
-                        <img className="user-profile" src={member.picture} alt={member.name}/>
-                        <div className="user-info">
-                          <div className="user-name">
-                            {member.name}
-                          </div>
-                          <div className="user-phase">
-                            Phase {member.phase}
-                          </div>
+                    <div className="user-profile__container">
+                      <img className="user-profile" src={member.picture} alt={member.name}/>
+                      <div className="user-info">
+                        <div className="user-name">
+                          {member.name}
                         </div>
-                      </a>
+                        <div className="user-phase">
+                          Phase {member.phase}
+                        </div>
+                      </div>
                     </div>
-                    <div className="team-table__row-column" style={{ width: '192px' }}>{member.readiness}</div>
-                    <div className="team-table__row-column" style={{ width: '211px' }}>{member.velocity}</div>
-                    <div className="team-table__row-column" style={{ width: '201px' }}>{member.skills}</div>
-                    <div className="team-table__row-column team-table__row-column__actions" style={{ width: '205px' }}>
-                      <p className={`badge ${this.badgeClass(member.status)}`}>
+
+                    <div className="badge__container">
+                      <div className={`badge ${this.badgeClass(member.status)}`}>
                         {_.capitalize(member.status.replace("-", " "))}
-                      </p>
+                      </div>
+                    </div>
+
+                    <div className="popover__container">
                       <Popover
                         onToggle={() => {
                           this.togglePopovers(member.email);
@@ -191,24 +182,24 @@ export default class TeamTable extends Component {
                         target={<img ref={`ellipsis-${member.email}`} src={EllipsisIcon} alt="Menu"/>}
                         open={activePopovers.hasOwnProperty(member.email) ? activePopovers[member.email] : false}
                       >
-                        <div className="team-table__popover">
-                          <div className="team-table__popover__header">
+                        <div className="members-list__popover">
+                          <div className="members-list__popover__header">
                             Actions
                           </div>
 
                           <a onClick={e => { e.preventDefault() }}
-                             className="team-table__popover__option">
+                             className="members-list__popover__option">
                             Update fellow information
                           </a>
 
                           <a onClick={e => { e.preventDefault() }}
-                             className="team-table__popover__option">
+                             className="members-list__popover__option">
                             Deactivate fellow
                           </a>
 
-                          <hr className="team-table__popover__divider"/>
+                          <hr className="members-list__popover__divider"/>
 
-                          <div className="team-table__popover__header">
+                          <div className="members-list__popover__header">
                             Connections
                           </div>
 
@@ -216,17 +207,20 @@ export default class TeamTable extends Component {
                             e.preventDefault();
                             this.togglePopovers(member.email);
                             this.redirect(`/teams/${_.lowerCase(member.team)}/${member.email}`);
-                          }} className="team-table__popover__option">View fellow deep-dive</a>
+                          }} className="members-list__popover__option">View fellow deep-dive</a>
                         </div>
                       </Popover>
                     </div>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
+
+                  </li>
+                );
+              })
+            }
+
+          </ul>
         </div>
       </Fragment>
+
     );
   }
 }
