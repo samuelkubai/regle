@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import './style.css';
+import Container from '../../lib/Container';
 
 // Import component assets
+import './style.css';
 import CancelIcon from '../../assets/cancel.svg';
 import AddIcon from '../../assets/add.svg';
 import Cookie from "cookies-js";
@@ -78,17 +78,17 @@ export default class InviteUserOverlay extends Component {
     const { user } = this.state;
     const { onCompleted } = this.props;
 
-    const team = `travela`;
+    const team = Container.currentTeam;
     const token = Cookie.get('jwt-token');
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${REACT_APP_API_URL}/teams/${team}/invite`,
         user,
         { headers: { Authorization: `${token}` } }
       );
 
-      onCompleted();
+      onCompleted(response.data);
     } catch (e) {
       console.log(`Failed to invite the user`);
       console.log(`Error:`, e)

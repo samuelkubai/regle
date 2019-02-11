@@ -63,6 +63,30 @@ export default class MembersList extends Component {
     }
   }
 
+  addUser = user => {
+    // Format the user data to something usable.
+    const userInfo = {
+      name: user.data.name,
+      phase: user.meta.phase,
+      picture: user.data.profile_picture,
+      team: user.meta.team,
+      status: user.meta.status,
+      email: user.data.email
+    };
+
+    // Add the user to the members array
+    let members = this.state.members;
+    members.unshift(userInfo);
+
+    // Set the updated member list to state
+    this.setState(state => {
+      return {
+        ...state,
+        members
+      }
+    });
+  };
+
   toggleUserInvite = () => {
     this.setState(state => {
       return {
@@ -196,9 +220,15 @@ export default class MembersList extends Component {
 
     return (
       <Fragment>
-        {invitingUser ? <InviteUserOverlay title="Invite a new fellow" onCompleted={() => {
-          this.toggleUserInvite()
-        }} />: ''}
+        {invitingUser ?
+          <InviteUserOverlay
+            title="Invite a new fellow"
+            onCompleted={user => {
+              this.addUser(user);
+              this.toggleUserInvite()
+            }}
+          /> :
+          ''}
 
         <div className="members-list__container">
           <div className="members-list__header">
