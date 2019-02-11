@@ -1,18 +1,17 @@
 import _ from "lodash";
 import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
 import React, { Component, Fragment } from "react";
 
+// Setup the redux store.
+import {updateSelectedTeam} from "../../store/actions/shell";
+
 // Import component assets
+import './style.css';
 import AddLogo from '../../assets/add.svg';
 import Caret from '../../assets/union.svg';
 
-import './style.css';
-
 class Shell extends Component {
-  state = {
-    selectedTeam: void 0
-  };
-
   componentDidUpdate (prevProps) {
     if (!_.isEqual(prevProps.teams, this.props.teams)) {
       const { teams } = this.props;
@@ -30,19 +29,13 @@ class Shell extends Component {
   }
 
   selectTeam (team) {
+    const { updateSelectedTeam } = this.props;
     window.localStorage.setItem('regle__selected-team', team);
-
-    this.setState(state => {
-      return {
-        ...state,
-        selectedTeam: team
-      }
-    });
+    updateSelectedTeam(team);
   }
 
   render() {
-    const { children, avatar, teams, username } = this.props;
-    const { selectedTeam } = this.state;
+    const { children, avatar, selectedTeam, teams, username } = this.props;
 
     return (
       <div className="app-shell__container">
@@ -56,7 +49,7 @@ class Shell extends Component {
                         `team-selector__team ${team.slug === selectedTeam ? 'team-selector__team--active': ''}`
                         }
                         onClick={() => {
-                          this.selectTeam(team.slug)
+                          window.location.replace(`/redirect?action=CHANGE_TEAM&&team=${team.slug}`);
                         }}
                     >
                       {team.name[0]}
@@ -78,9 +71,7 @@ class Shell extends Component {
                   src={avatar}
                 />
                 <div className="profile-dropdown__name">
-                  {_.truncate(username, {
-                    length: 11
-                  })}
+                  { _.truncate(username, { length: 11}) }
                 </div>
                 <img
                   alt="Down"
@@ -110,15 +101,18 @@ class Shell extends Component {
           </Fragment>
         </div>
       </div>
-
     );
   }
 }
 
 const initMapStateToProps = ({ shell }) => {
   return {
-    selectedTeam: shell.team
+    selectedTeam: shell.selectedTeam
   }
 };
 
-export default connect(initMapStateToProps)(Shell);
+const initMapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ updateSelectedTeam }, dispatch)
+};
+
+export default connect(initMapStateToProps, initMapDispatchToProps)(Shell);

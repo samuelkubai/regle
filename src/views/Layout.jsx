@@ -20,6 +20,7 @@ class Layout extends Component {
 
     fetchUserTeams();
   }
+
   render() {
     const { user, children, teams, setupComplete } = this.props;
 

@@ -13,3 +13,12 @@ export const storeUsersTeams = (response) => {
     response
   }
 };
+
+export const updateSelectedTeam = (team) => {
+  return {
+    type: types.UPDATE_SELECTED_TEAM,
+    data: {
+      team
+    }
+  }
+};
