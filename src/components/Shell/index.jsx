@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { connect } from 'react-redux';
 import React, { Component, Fragment } from "react";
 
 // Import component assets
@@ -7,17 +8,61 @@ import Caret from '../../assets/union.svg';
 
 import './style.css';
 
-export default class Shell extends Component {
+class Shell extends Component {
+  state = {
+    selectedTeam: void 0
+  };
+
+  componentDidUpdate (prevProps) {
+    if (!_.isEqual(prevProps.teams, this.props.teams)) {
+      const { teams } = this.props;
+
+      // First check if in the local storage the selected team was updated
+      let team = window.localStorage.getItem('regle__selected-team');
+
+      // If not have the first team passed be set as the selected team
+      if (team === null) {
+        team = teams[0] && teams[0].slug;
+      }
+
+      this.selectTeam(team);
+    }
+  }
+
+  selectTeam (team) {
+    window.localStorage.setItem('regle__selected-team', team);
+
+    this.setState(state => {
+      return {
+        ...state,
+        selectedTeam: team
+      }
+    });
+  }
+
   render() {
-    const { children, avatar, username } = this.props;
+    const { children, avatar, teams, username } = this.props;
+    const { selectedTeam } = this.state;
 
     return (
       <div className="app-shell__container">
         <div className="sidebar__container">
           <div className="teams-selector__container">
             <ul className="teams-selector__list">
-              <li className="team-selector__team team-selector__team--active">A</li>
-              <li className="team-selector__team">E</li>
+              {teams.map(team => {
+                return (
+                    <li key={team.slug}
+                        className={
+                        `team-selector__team ${team.slug === selectedTeam ? 'team-selector__team--active': ''}`
+                        }
+                        onClick={() => {
+                          this.selectTeam(team.slug)
+                        }}
+                    >
+                      {team.name[0]}
+                    </li>
+                )
+              })}
               <li className="team-selector__team">
                 <img src={AddLogo} alt="Add"/>
               </li>
@@ -69,3 +114,11 @@ export default class Shell extends Component {
     );
   }
 }
+
+const initMapStateToProps = ({ shell }) => {
+  return {
+    selectedTeam: shell.team
+  }
+};
+
+export default connect(initMapStateToProps)(Shell);

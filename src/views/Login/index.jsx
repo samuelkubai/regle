@@ -29,7 +29,7 @@ export default class Login extends Component {
   redirect() {
     const {  history } = this.props;
 
-    history.push('/teams/travela');
+    history.push('/redirect?action=REDIRECT_DURING_LOGIN');
   }
 
   login() {

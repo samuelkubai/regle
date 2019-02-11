@@ -2,10 +2,10 @@ import _ from 'lodash';
 import React, {Component, Fragment} from "react";
 import Cookie from "cookies-js";
 import axios from "axios/index";
+import Container from '../../lib/Container';
 
 // Import components
 import Popover from '../Popover';
-import OverlayLoader from '../OverlayLoader';
 import InviteUserOverlay from '../InviteUserOverlay';
 
 // Import the component's assets
@@ -32,8 +32,7 @@ export default class MembersList extends Component {
 
   async componentDidMount() {
     const { REACT_APP_API_URL } = process.env;
-    // const urlParams = new URLSearchParams(window.location.search);
-    const team = `travela`;
+    const team = Container.currentTeam;
 
     const token = Cookie.get('jwt-token');
     const response = await axios.get(
@@ -54,7 +53,7 @@ export default class MembersList extends Component {
     });
   }
 
-  badgeClass(status) {
+  static badgeClass(status) {
     if (status === 'ready') {
       return 'badge--ready';
     } else if (status === 'on-track') {
@@ -64,44 +63,11 @@ export default class MembersList extends Component {
     }
   }
 
-  redirect(path) {
-    const { history } = this.props;
-    history.push(path);
-  }
-
   toggleUserInvite = () => {
     this.setState(state => {
       return {
         ...state,
         invitingUser: !state.invitingUser
-      }
-    })
-  };
-
-  hidePopovers = (email) => {
-    const { activePopovers } = this.state;
-
-    // Update the active popovers status
-    activePopovers[email] = false;
-
-    this.setState(state => {
-      return {
-        ...state,
-        activePopovers
-      }
-    })
-  };
-
-  activatePopovers = (email) => {
-    const { activePopovers } = this.state;
-
-    // Update the active popovers status
-    activePopovers[email] = true;
-
-    this.setState(state => {
-      return {
-        ...state,
-        activePopovers
       }
     })
   };
@@ -120,8 +86,9 @@ export default class MembersList extends Component {
     })
   };
 
+
   render () {
-    const { match: { params: { team }} } = this.props;
+    const { match: { params: { team }}, selectMember } = this.props;
     const { loaded, invitingUser, members, meta, team_stats, activePopovers } = this.state;
 
     return (
@@ -135,7 +102,7 @@ export default class MembersList extends Component {
         <div className="members-list__container">
           <div className="members-list__header">
             <div className="members-list__title">
-              Members List (2 Filters)
+              Members List
             </div>
 
             <div className="members-list__actions">
@@ -153,7 +120,7 @@ export default class MembersList extends Component {
                   <li key={member.email}
                       className="members-list__member"
                       onClick={() => {
-                        this.redirect(`/teams/${team}/members/${member.email}`)
+                        selectMember(member.email);
                       }}
                   >
                     <div className="user-profile__container">
@@ -169,7 +136,7 @@ export default class MembersList extends Component {
                     </div>
 
                     <div className="badge__container">
-                      <div className={`badge ${this.badgeClass(member.status)}`}>
+                      <div className={`badge ${MembersList.badgeClass(member.status)}`}>
                         {_.capitalize(member.status.replace("-", " "))}
                       </div>
                     </div>
@@ -216,7 +183,6 @@ export default class MembersList extends Component {
                 );
               })
             }
-
           </ul>
         </div>
       </Fragment>

@@ -1,0 +1,29 @@
+.pg-setup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: #ffffff;
+    z-index: 30;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.setup__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.setup__message {
+    color: #153C55;
+    font-size: 18px;
+    margin-top: 64px;
+    text-align: center;
+}

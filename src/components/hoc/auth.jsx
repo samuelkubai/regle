@@ -13,6 +13,7 @@ export default function(ComposedComponent) {
 
       if (!user) {
         window.location.replace(`${window.location.origin}`);
+        return;
       }
 
       this.setState(state => { return {...state, user, isLoaded: true} });
