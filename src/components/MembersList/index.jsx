@@ -86,15 +86,116 @@ export default class MembersList extends Component {
     })
   };
 
+  renderMemberslist = ({ activePopovers, members, selectMember }) => {
+    return (
+      <ul className="members-list__list">
+        {
+          members.map(member => {
+            return (
+              <li key={member.email}
+                  className="members-list__member"
+                  onClick={() => {
+                    selectMember(member.email);
+                  }}
+              >
+                <div className="user-profile__container">
+                  <img className="user-profile" src={member.picture} alt={member.name}/>
+                  <div className="user-info">
+                    <div className="user-name">
+                      {member.name}
+                    </div>
+                    <div className="user-phase">
+                      Phase {member.phase}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="badge__container">
+                  <div className={`badge ${MembersList.badgeClass(member.status)}`}>
+                    {_.capitalize(member.status.replace("-", " "))}
+                  </div>
+                </div>
+
+                <div className="popover__container">
+                  <Popover
+                    onToggle={() => {
+                      this.togglePopovers(member.email);
+                    }}
+                    target={<img ref={`ellipsis-${member.email}`} src={EllipsisIcon} alt="Menu"/>}
+                    open={activePopovers.hasOwnProperty(member.email) ? activePopovers[member.email] : false}
+                  >
+                    <div className="members-list__popover">
+                      <div className="members-list__popover__header">
+                        Actions
+                      </div>
+
+                      <a onClick={e => { e.preventDefault() }}
+                         className="members-list__popover__option">
+                        Update fellow information
+                      </a>
+
+                      <a onClick={e => { e.preventDefault() }}
+                         className="members-list__popover__option">
+                        Deactivate fellow
+                      </a>
+
+                      <hr className="members-list__popover__divider"/>
+
+                      <div className="members-list__popover__header">
+                        Connections
+                      </div>
+
+                      <a onClick={e => {
+                        e.preventDefault();
+                        this.togglePopovers(member.email);
+                        this.redirect(`/teams/${_.lowerCase(member.team)}/${member.email}`);
+                      }} className="members-list__popover__option">View fellow deep-dive</a>
+                    </div>
+                  </Popover>
+                </div>
+
+              </li>
+            );
+          })
+        }
+      </ul>
+    );
+  };
+
+  renderMembersListPlaceholder = () => {
+    const shadowMembers = 10;
+
+    let shadowMembersList = [];
+
+    for (let index = 1; index <= shadowMembers; index++) {
+     shadowMembersList.push(
+       (
+         <li key={index} className="members-list__member">
+           <div className="shadow-member__container">
+             <div className="shadow-member__image shadow-elements"></div>
+             <div className="shadow-member__information">
+               <div className="shadow-member__name shadow-elements"></div>
+               <div className="shadow-member__phase shadow-elements"></div>
+             </div>
+           </div>
+         </li>
+       )
+     )
+    }
+
+    return (
+      <ul className="members-list__list">
+        { shadowMembersList }
+      </ul>
+    );
+  };
 
   render () {
-    const { match: { params: { team }}, selectMember } = this.props;
-    const { loaded, invitingUser, members, meta, team_stats, activePopovers } = this.state;
+    const { selectMember } = this.props;
+    const { loaded, invitingUser, members, activePopovers } = this.state;
 
     return (
       <Fragment>
-        {/*{!loaded ? <OverlayLoader/> : ''}*/}
-
         {invitingUser ? <InviteUserOverlay title="Invite a new fellow" onCompleted={() => {
           this.toggleUserInvite()
         }} />: ''}
@@ -113,80 +214,13 @@ export default class MembersList extends Component {
             </div>
           </div>
 
-          <ul className="members-list__list">
-            {
-              members.map(member => {
-                return (
-                  <li key={member.email}
-                      className="members-list__member"
-                      onClick={() => {
-                        selectMember(member.email);
-                      }}
-                  >
-                    <div className="user-profile__container">
-                      <img className="user-profile" src={member.picture} alt={member.name}/>
-                      <div className="user-info">
-                        <div className="user-name">
-                          {member.name}
-                        </div>
-                        <div className="user-phase">
-                          Phase {member.phase}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="badge__container">
-                      <div className={`badge ${MembersList.badgeClass(member.status)}`}>
-                        {_.capitalize(member.status.replace("-", " "))}
-                      </div>
-                    </div>
-
-                    <div className="popover__container">
-                      <Popover
-                        onToggle={() => {
-                          this.togglePopovers(member.email);
-                        }}
-                        target={<img ref={`ellipsis-${member.email}`} src={EllipsisIcon} alt="Menu"/>}
-                        open={activePopovers.hasOwnProperty(member.email) ? activePopovers[member.email] : false}
-                      >
-                        <div className="members-list__popover">
-                          <div className="members-list__popover__header">
-                            Actions
-                          </div>
-
-                          <a onClick={e => { e.preventDefault() }}
-                             className="members-list__popover__option">
-                            Update fellow information
-                          </a>
-
-                          <a onClick={e => { e.preventDefault() }}
-                             className="members-list__popover__option">
-                            Deactivate fellow
-                          </a>
-
-                          <hr className="members-list__popover__divider"/>
-
-                          <div className="members-list__popover__header">
-                            Connections
-                          </div>
-
-                          <a onClick={e => {
-                            e.preventDefault();
-                            this.togglePopovers(member.email);
-                            this.redirect(`/teams/${_.lowerCase(member.team)}/${member.email}`);
-                          }} className="members-list__popover__option">View fellow deep-dive</a>
-                        </div>
-                      </Popover>
-                    </div>
-
-                  </li>
-                );
-              })
-            }
-          </ul>
+          {
+            loaded ?
+              this.renderMemberslist({ activePopovers, members, selectMember }) :
+              this.renderMembersListPlaceholder()
+          }
         </div>
       </Fragment>
-
     );
   }
 }
