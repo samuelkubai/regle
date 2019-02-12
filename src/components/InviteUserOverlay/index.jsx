@@ -88,7 +88,7 @@ export default class InviteUserOverlay extends Component {
         { headers: { Authorization: `${token}` } }
       );
 
-      onCompleted(response.data);
+      onCompleted(response.data, true);
     } catch (e) {
       console.log(`Failed to invite the user`);
       console.log(`Error:`, e)
@@ -96,14 +96,14 @@ export default class InviteUserOverlay extends Component {
   };
 
   render () {
-    const { title, onCompleted } = this.props;
-    const { user: { usernames } } = this.state;
+    const {title, onCompleted} = this.props;
+    const {user: {usernames}} = this.state;
 
     return (
       <div className="modal__overlay">
         <div className="modal">
           <div className="modal__header">
-            { title }
+            {title}
           </div>
 
           <div className="modal__body">
@@ -120,7 +120,7 @@ export default class InviteUserOverlay extends Component {
 
             {
               usernames.map((username, index) => (
-                <div key={index} className={`username-field ${usernames.length < 2 ? 'username-field__first': ''}`}>
+                <div key={index} className={`username-field ${usernames.length < 2 ? 'username-field__first' : ''}`}>
                   <div className="form-field">
                     <input type="text" value={username} onChange={(event) => {
                       this.populateGithubUsername(event.target.value, index)
@@ -150,7 +150,7 @@ export default class InviteUserOverlay extends Component {
 
           <div className="modal__footer">
             <button className="btn--raised white-btn" onClick={() => {
-              onCompleted()
+              onCompleted(null, false)
             }}>
               Cancel
             </button>

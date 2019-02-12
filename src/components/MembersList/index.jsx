@@ -223,8 +223,8 @@ export default class MembersList extends Component {
         {invitingUser ?
           <InviteUserOverlay
             title="Invite a new fellow"
-            onCompleted={user => {
-              this.addUser(user);
+            onCompleted={(user, success) => {
+              if (success) { this.addUser(user); }
               this.toggleUserInvite()
             }}
           /> :
