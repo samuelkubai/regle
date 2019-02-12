@@ -7,6 +7,15 @@ const initialState = {
 
 const shell = (state = initialState, action) => {
   switch (action.type) {
+    case types.APPEND_NEW_TEAM:
+      const { teams } = state;
+
+      teams.push(action.data.team);
+
+      return {
+        ...state,
+        teams
+      };
     case types.UPDATE_TEAM_LIST:
       return {
         ...state,

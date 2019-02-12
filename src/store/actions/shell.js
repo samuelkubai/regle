@@ -1,5 +1,14 @@
 import * as types from '../actionTypes';
 
+export const appendNewTeam = (team) => {
+  return {
+    type: types.APPEND_NEW_TEAM,
+    data: {
+      team
+    }
+  }
+};
+
 export const fetchUserTeams = (data) => {
   return {
     type: types.FETCH_USER_TEAMS,
