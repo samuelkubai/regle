@@ -8,7 +8,6 @@ import { fetchUserTeams } from "../store/actions/shell";
 // Import the child components
 import '../components/custom-elements/NavBar/index';
 import '../components/custom-elements/Breadcrumbs/index';
-import Setup from "../components/Setup";
 import Shell from '../components/Shell';
 
 // Import the HOC components
@@ -26,7 +25,7 @@ class Layout extends Component {
 
     return (
       <Shell avatar={user.UserInfo.picture} username={user.UserInfo.name} teams={teams} setup-complete={setupComplete}>
-        { setupComplete ? <Fragment> {children} </Fragment> : <Setup/> }
+        { <Fragment> {children} </Fragment> }
       </Shell>
     );
   }

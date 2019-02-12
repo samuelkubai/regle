@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import React, { Component, Fragment } from "react";
 
 // Setup the redux store.
-import {updateSelectedTeam} from "../../store/actions/shell";
+import { updateSelectedTeam } from "../../store/actions/shell";
 
 // Import component assets
 import './style.css';

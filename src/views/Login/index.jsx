@@ -16,12 +16,13 @@ export default class Login extends Component {
   componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
 
-    const token = urlParams.get('token');
+    const token = urlParams.get('token') ? urlParams.get('token') : Cookie.get('jwt-token');
 
     if (token) {
-      Cookie.set('jwt-token', token);
-
-      // FIX: Make this more dynamic
+      if (!Cookie.get('jwt-token')) {
+        Cookie.set('jwt-token', token);
+      }
+      // TODO: Make this more dynamic
       this.redirect();
     }
   }
