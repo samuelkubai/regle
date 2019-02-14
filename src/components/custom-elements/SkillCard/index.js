@@ -1,6 +1,6 @@
 class SkillCard extends HTMLElement {
   connectedCallback() {
-    this.initShadow();
+    this.domNode = this.initShadow();
   }
 
   initShadow() {
@@ -57,6 +57,16 @@ class SkillCard extends HTMLElement {
       return 'in-progress';
     } else {
       return 'in-danger';
+    }
+  }
+
+  static get observedAttributes() {
+    return ['target', 'skill']
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if ((name === 'target' || name === 'skill') && this.domNode) {
+      this.domNode.innerHTML = SkillCard.style + this.template;
     }
   }
 

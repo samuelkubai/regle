@@ -1,7 +1,7 @@
 import * as types from '../actionTypes';
 
 const initialState = {
-  selectedTeam: 'travela',
+  selectedTeam: '',
   teams: []
 };
 
