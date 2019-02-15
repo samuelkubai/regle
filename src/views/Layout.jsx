@@ -1,5 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import React, { Component, Fragment } from 'react';
 
 // Setup the redux environment
@@ -43,4 +44,4 @@ const initMapDispatchToProps = (dispatch) => {
   return bindActionCreators({ fetchUserTeams }, dispatch);
 };
 
-export default AuthHOC(connect(initMapStateToProps, initMapDispatchToProps)(Layout));
+export default AuthHOC(withRouter(connect(initMapStateToProps, initMapDispatchToProps)(Layout)));

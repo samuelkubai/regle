@@ -2,7 +2,9 @@ import * as types from '../actionTypes';
 
 const initialState = {
   selectedTeam: '',
-  teams: []
+  teams: [],
+  teams__loaded: false,
+  team__selected: false
 };
 
 const shell = (state = initialState, action) => {
@@ -26,7 +28,8 @@ const shell = (state = initialState, action) => {
     case  types.UPDATE_SELECTED_TEAM:
       return {
         ...state,
-        selectedTeam: action.data.team
+        selectedTeam: action.data.team,
+        team__selected: true
       };
     default: return state;
   }

@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
+import { withRouter } from 'react-router-dom'
 import React, { Component, Fragment } from "react";
 
 // Setup the redux store.
@@ -19,22 +20,6 @@ class Shell extends Component {
     creatingTeam: false
   };
 
-  componentDidUpdate (prevProps) {
-    if (!_.isEqual(prevProps.teams, this.props.teams)) {
-      const { teams } = this.props;
-
-      // First check if in the local storage the selected team was updated
-      let team = window.localStorage.getItem('regle__selected-team');
-
-      // If not have the first team passed be set as the selected team
-      if (team === null) {
-        team = teams[0] && teams[0].slug;
-      }
-
-      this.selectTeam(team);
-    }
-  }
-
   appendNewTeam = (team) => {
     const { appendNewTeam } = this.props;
 
@@ -49,12 +34,6 @@ class Shell extends Component {
       }
     });
   };
-
-  selectTeam (team) {
-    const { updateSelectedTeam } = this.props;
-    window.localStorage.setItem('regle__selected-team', team);
-    updateSelectedTeam(team);
-  }
 
   render() {
     const { children, avatar, selectedTeam, teams, username } = this.props;
@@ -130,7 +109,14 @@ class Shell extends Component {
                 <li className="menu-bar__item">Members</li>
 
                 <li className="menu-bar__title">Team</li>
-                <li className="menu-bar__item menu-bar__item--active">Members</li>
+                <li
+                  className="menu-bar__item menu-bar__item--active"
+                  onClick={() => {
+                    window.location.replace(`/teams/${selectedTeam}/members`)
+                  }}
+                >
+                  Members
+                </li>
                 <li className="menu-bar__item">Skills</li>
                 <li className="menu-bar__item">Targets</li>
                 <li className="menu-bar__item">Settings</li>
@@ -158,4 +144,4 @@ const initMapDispatchToProps = (dispatch) => {
   return bindActionCreators({ appendNewTeam, updateSelectedTeam }, dispatch)
 };
 
-export default connect(initMapStateToProps, initMapDispatchToProps)(Shell);
+export default withRouter(connect(initMapStateToProps, initMapDispatchToProps)(Shell));

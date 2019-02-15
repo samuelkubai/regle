@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 import React, { Component } from "react";
 import Container from '../../lib/Container';
 
@@ -39,10 +40,8 @@ class Redirect extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!_.isEqual(prevProps, this.props)) {
-      const action = new URLSearchParams(window.location.search).get("action");
-      this.dispatch(action);
-    }
+    const action = new URLSearchParams(window.location.search).get("action");
+    this.dispatch(action);
   }
 
   render() {
@@ -53,7 +52,7 @@ class Redirect extends Component {
 const initMapStateToProps = ({ shell }) => {
   return {
     selectedTeam: shell.selectedTeam,
-    setupComplete: shell.teams__loaded,
+    setupComplete: shell.teams__loaded && shell.team__selected,
   };
 };
 
@@ -61,4 +60,4 @@ const initMapDispatchToProps = (dispatch) => {
   return bindActionCreators({ updateSelectedTeam }, dispatch)
 };
 
-export default AuthHOC(connect(initMapStateToProps, initMapDispatchToProps)(Redirect));
+export default AuthHOC(withRouter(connect(initMapStateToProps, initMapDispatchToProps)(Redirect)));
