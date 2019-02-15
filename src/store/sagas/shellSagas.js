@@ -23,9 +23,9 @@ export function* fetchUsersTeams(action) {
       team = teams[0] && teams[0].slug;
     }
 
-    yield put(updateSelectedTeam(team));
-
     Container.currentTeam = team;
+
+    yield put(updateSelectedTeam(Container.currentTeam));
   } catch (error) {
     console.log(`Error while fetching user's teams`, error);
   }
