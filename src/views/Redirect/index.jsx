@@ -15,12 +15,17 @@ import AuthHOC from "../../components/hoc/auth";
 
 class Redirect extends Component {
   dispatch = (action) => {
-    const { history, setupComplete, selectedTeam } = this.props;
+    const { history, setupComplete, selectedTeam, user } = this.props;
 
     switch (action) {
       case 'REDIRECT_DURING_LOGIN':
-        if (setupComplete)
+        if (setupComplete) {
+          window.FS.identify(user.UserInfo.id, {
+            displayName: user.UserInfo.name,
+            email: user.UserInfo.email,
+          });
           history.push(`teams/${selectedTeam}/members`);
+        }
         return;
       case 'CHANGE_TEAM':
         const { updateSelectedTeam } = this.props;
